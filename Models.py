@@ -3,7 +3,7 @@ from flask_sqlalchemy import SQLAlchemy
 
 
 app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://root:gandamina#1@localhost/rheasdb'
+app.config.from_pyfile('database.config')
 db = SQLAlchemy(app)
 
 class member(db.Model):
@@ -40,11 +40,13 @@ class incometypes(db.Model):
     name=db.Column(db.String(40))
 class expendituretypes(db.Model):
     id=db.Column(db.Integer,primary_key=True)
-    name=db.Columns(db.String(40))
+    name=db.Column(db.String(40))
 class Expenses(db.Model):
     id=db.Column(db.Integer,primary_key=True)
     type=db.Column(db.Integer,db.ForeignKey('expendituretypes.id'))
     amount=db.Column(db.Float)
-    date=db.Column(db.datetime)
+    date=db.Column(db.DateTime)
+
+
 
 
